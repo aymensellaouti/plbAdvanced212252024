@@ -7,5 +7,10 @@ export const canLeaveGuard: CanDeactivateFn<TodoComponent> = (
   currentState,
   nextState
 ) => {
+  if (component.todo.name.trim() || component.todo.content.trim()) {
+    return confirm(
+      `êtes vous sur de vouloir sortir ? Votre formulaire est plein !`
+    );
+  }
   return true;
 };

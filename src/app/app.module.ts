@@ -53,6 +53,10 @@ import { LOGGER_INJECTION_TOKEN } from "./injection tokens/logger.injection-toke
 import { loggerFactory } from "./provider factory/logger.factory";
 import { SayHello } from "./services/sayHello.service";
 import { LoggerService } from "./services/logger.service";
+import { CvService } from "./cv/services/cv.service";
+import { CONSTANTES } from "../config/const.config";
+import { FakeCvService } from "./cv/services/fake-cv.service";
+import { Logger2Service } from "./services/logger2.service";
 
 @NgModule({
   declarations: [
@@ -111,6 +115,21 @@ import { LoggerService } from "./services/logger.service";
   ],
   providers: [
     AuthInterceptorProvider,
+    {
+      provide: CvService,
+      useClass: CONSTANTES.env === "dev" ? FakeCvService : CvService,
+    },
+    {
+      provide: LoggerService,
+      useClass: LoggerService,
+      multi: true,
+    },
+    {
+      provide: LoggerService,
+      useClass: Logger2Service,
+      multi: true,
+    },
+
     /* {
       provide: LoggerService,
       useClass: LoggerService,

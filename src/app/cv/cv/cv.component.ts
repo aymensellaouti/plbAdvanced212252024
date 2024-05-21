@@ -16,7 +16,7 @@ export class CvComponent {
   date = new Date();
 
   constructor(
-    private logger: LoggerService,
+    /*     private logger: LoggerService, */
     private toastr: ToastrService,
     private cvService: CvService
   ) {
@@ -31,7 +31,7 @@ export class CvComponent {
           Veuillez contacter l'admin.`);
       },
     });
-    this.logger.logger("je suis le cvComponent");
+    /* this.logger.logger("je suis le cvComponent"); */
     this.toastr.info("Bienvenu dans notre CvTech");
   }
   onForwardCv(cv: Cv) {

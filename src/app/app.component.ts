@@ -1,5 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { SayHello } from "./services/sayHello.service";
+import { LoggerService } from "./services/logger.service";
 
 @Component({
   selector: "app-root",
@@ -9,8 +10,10 @@ import { SayHello } from "./services/sayHello.service";
 export class AppComponent {
   /*   helloService = new SayHello(); */
   /* Donne moi un HELLO */
-  constructor(private helloService: SayHello) {
-    this.helloService.hello();
+  constructor(@Inject(LoggerService) private loggerService: LoggerService[]) {
+    this.loggerService.forEach((logger) =>
+      logger.logger("cc je teste le multi")
+    );
   }
   title = "Starting Advanced Topics";
 }

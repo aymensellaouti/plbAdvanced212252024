@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from "@angular/core";
-import { Observable, Subscription, filter, map } from "rxjs";
+import { Observable, Subscription, filter, map, take } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -11,6 +11,7 @@ export class TestObservableComponent {
   firstObservable$: Observable<number>;
 
   constructor(private toaster: ToastrService) {
+    /* Notre publication */
     this.firstObservable$ = new Observable((observer) => {
       let i = 5;
       setInterval(() => {
@@ -20,5 +21,31 @@ export class TestObservableComponent {
         observer.next(i--);
       }, 1000);
     });
+    /* Observable : 1*  */
+    /* Moi */
+    this.firstObservable$.subscribe((data) => {
+      console.log(data);
+    });
+    /* Ophélie */
+    this.firstObservable$
+      /* 5 4 3 2 1 */
+      .pipe(
+        map((valeur) => valeur * 3),
+        /* 15 12 9 6 3 */
+        filter((x) => x % 2 == 0),
+        /* 12 6 */
+        take(1)
+      )
+      .subscribe({
+        next: (donnes) => {
+          this.toaster.info("" + donnes);
+        },
+        complete: () => {
+          this.toaster.error("Fin du flux");
+        },
+        error: (e) => {
+          console.log({ e });
+        },
+      });
   }
 }

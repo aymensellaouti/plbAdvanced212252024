@@ -59,8 +59,9 @@ import { FakeCvService } from "./cv/services/fake-cv.service";
 import { Logger2Service } from "./services/logger2.service";
 import { v4 as uuidv4, v4 } from "uuid";
 import { UUID_INJECTION_TOKEN } from "./injection tokens/uuid.injection-token";
-import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
-import { MasterDetailComponent } from './cv/master-detail/master-detail.component';
+import { WeekTodoComponent } from "./todo/week-todo/week-todo.component";
+import { MasterDetailComponent } from "./cv/master-detail/master-detail.component";
+import { FromOfComponent } from "./rxjs/from-of/from-of.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +103,7 @@ import { MasterDetailComponent } from './cv/master-detail/master-detail.componen
     ProductsComponent,
     WeekTodoComponent,
     MasterDetailComponent,
+    FromOfComponent,
   ],
   imports: [
     BrowserModule,

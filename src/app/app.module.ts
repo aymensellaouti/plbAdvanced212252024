@@ -49,6 +49,10 @@ import { ProductsComponent } from "./products/products.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { AutocompleteComponent } from "./cv/autocomplete/autocomplete.component";
 import { SliderComponent } from "./rxjs/slider/slider.component";
+import { LOGGER_INJECTION_TOKEN } from "./injection tokens/logger.injection-token";
+import { loggerFactory } from "./provider factory/logger.factory";
+import { SayHello } from "./services/sayHello.service";
+import { LoggerService } from "./services/logger.service";
 
 @NgModule({
   declarations: [
@@ -105,7 +109,19 @@ import { SliderComponent } from "./rxjs/slider/slider.component";
       registrationStrategy: "registerWhenStable:30000",
     }),
   ],
-  providers: [AuthInterceptorProvider],
+  providers: [
+    AuthInterceptorProvider,
+    /* {
+      provide: LoggerService,
+      useClass: LoggerService,
+      //useFactory: loggerFactory,
+    }, */
+    /* {
+      provide: SayHello,
+      useClass: SayHello,
+      //useFactory: (logger: LoggerService) => new SayHello(logger),
+    }, */
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

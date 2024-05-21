@@ -57,7 +57,8 @@ import { CvService } from "./cv/services/cv.service";
 import { CONSTANTES } from "../config/const.config";
 import { FakeCvService } from "./cv/services/fake-cv.service";
 import { Logger2Service } from "./services/logger2.service";
-
+import { v4 as uuidv4, v4 } from "uuid";
+import { UUID_INJECTION_TOKEN } from "./injection tokens/uuid.injection-token";
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,6 +129,10 @@ import { Logger2Service } from "./services/logger2.service";
       provide: LoggerService,
       useClass: Logger2Service,
       multi: true,
+    },
+    {
+      provide: UUID_INJECTION_TOKEN,
+      useValue: uuidv4,
     },
 
     /* {

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Route } from "@angular/router";
+import { RouterModule, Route, Routes } from "@angular/router";
 import { TodoComponent } from "./todo/todo/todo.component";
 import { MiniWordComponent } from "./directives/mini-word/mini-word.component";
 import { ColorComponent } from "./components/color/color.component";
@@ -12,16 +12,22 @@ import { AddCvComponent } from "./cv/add-cv/add-cv.component";
 import { CvComponent } from "./cv/cv/cv.component";
 import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { RhComponent } from "./optimizationPattern/rh/rh.component";
-
-const routes: Route[] = [
+import { MasterDetailComponent } from "./cv/master-detail/master-detail.component";
+// /todo
+const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "rh", component: RhComponent },
   {
     path: "cv",
     component: CvComponent,
-  },
+  } /* todo/add */,
   { path: "cv/add", component: AddCvComponent, canActivate: [AuthGuard] },
-  { path: "cv/:id", component: DetailsCvComponent },
+  {
+    path: "cv/list",
+    component: MasterDetailComponent,
+    children: [{ path: ":id", component: DetailsCvComponent }],
+  },
+  { path: "cv/:id", component: DetailsCvComponent, data: { name: "ophélie" } },
   {
     path: "",
     component: FrontComponent,
@@ -35,6 +41,7 @@ const routes: Route[] = [
     component: AdminComponent,
     children: [{ path: "color", component: ColorComponent }],
   },
+  /* Joker */
   { path: "**", component: NF404Component },
 ];
 

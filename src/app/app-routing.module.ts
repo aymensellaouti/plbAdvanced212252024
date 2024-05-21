@@ -7,12 +7,13 @@ import { FrontComponent } from "./templates/front/front.component";
 import { AdminComponent } from "./templates/admin/admin.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { NF404Component } from "./components/nf404/nf404.component";
-import { AuthGuard } from "./auth/guards/auth.guard";
+import { authGuard } from "./auth/guards/auth.guard";
 import { AddCvComponent } from "./cv/add-cv/add-cv.component";
 import { CvComponent } from "./cv/cv/cv.component";
 import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { RhComponent } from "./optimizationPattern/rh/rh.component";
 import { MasterDetailComponent } from "./cv/master-detail/master-detail.component";
+import { listCvsResolver } from "./cv/list-cvs.resolver";
 // /todo
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -21,11 +22,18 @@ const routes: Routes = [
     path: "cv",
     component: CvComponent,
   } /* todo/add */,
-  { path: "cv/add", component: AddCvComponent, canActivate: [AuthGuard] },
+  {
+    path: "cv/add",
+    component: AddCvComponent,
+    canActivate: [authGuard],
+  },
   {
     path: "cv/list",
     component: MasterDetailComponent,
     children: [{ path: ":id", component: DetailsCvComponent }],
+    resolve: {
+      cvs: listCvsResolver,
+    },
   },
   { path: "cv/:id", component: DetailsCvComponent, data: { name: "ophélie" } },
   {

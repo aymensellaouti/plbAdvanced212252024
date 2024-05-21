@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { CvService } from "../services/cv.service";
 import { Cv } from "../model/cv";
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class MasterDetailComponent {
   cvs: Cv[] = [];
+
   constructor(
     /*     private logger: LoggerService, */
     private toastr: ToastrService,
@@ -18,7 +19,8 @@ export class MasterDetailComponent {
     private router: Router,
     private acr: ActivatedRoute
   ) {
-    this.cvService.getCvs().subscribe({
+    this.cvs = this.acr.snapshot.data["cvs"];
+    /* this.cvService.getCvs().subscribe({
       next: (cvs) => {
         this.cvs = cvs;
       },
@@ -28,7 +30,7 @@ export class MasterDetailComponent {
           Attention!! Les données sont fictives, problème avec le serveur.
           Veuillez contacter l'admin.`);
       },
-    });
+    }); */
     /* this.logger.logger("je suis le cvComponent"); */
     this.toastr.info("Bienvenu dans notre CvTech");
   }

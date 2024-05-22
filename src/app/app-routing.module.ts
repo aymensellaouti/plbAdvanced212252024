@@ -22,24 +22,6 @@ const routes: Routes = [
   { path: "rh", component: RhComponent },
   { path: "products", component: ProductsComponent },
   {
-    path: "cv",
-    component: CvComponent,
-  } /* todo/add */,
-  {
-    path: "cv/add",
-    component: AddCvComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: "cv/list",
-    component: MasterDetailComponent,
-    children: [{ path: ":id", component: DetailsCvComponent }],
-    resolve: {
-      cvs: listCvsResolver,
-    },
-  },
-  { path: "cv/:id", component: DetailsCvComponent, data: { name: "ophélie" } },
-  {
     path: "",
     component: FrontComponent,
     children: [{ path: "word", component: MiniWordComponent }],

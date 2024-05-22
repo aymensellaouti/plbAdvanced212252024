@@ -33,8 +33,8 @@ export class MasterDetailComponent {
     }); */
     /* this.logger.logger("je suis le cvComponent"); */
     this.toastr.info("Bienvenu dans notre CvTech");
-  }
-  onForwardCv(cv: Cv) {
-    this.router.navigate([cv.id], { relativeTo: this.acr });
+    this.cvService.selectCv$.subscribe((cv) =>
+      this.router.navigate([cv.id], { relativeTo: this.acr })
+    );
   }
 }

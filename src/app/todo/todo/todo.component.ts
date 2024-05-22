@@ -9,6 +9,12 @@ import { TodoService } from "../service/todo.service";
   providers: [TodoService],
 })
 export class TodoComponent {
+  plus(index: number) {
+    this.todoService.plus(index);
+  }
+  moins(index: number) {
+    this.todoService.moins(index);
+  }
   todos: Todo[] = [];
   todo = new Todo();
   constructor(private todoService: TodoService) {

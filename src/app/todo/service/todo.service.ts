@@ -12,9 +12,8 @@ export class TodoService {
   private todos: Todo[] = [];
   private uuid: () => string = inject(UUID_INJECTION_TOKEN);
   private loggerService = inject(LoggerService);
-  constructor() /* private loggerService: LoggerService,
-    @Inject(UUID_INJECTION_TOKEN) private uuid: () => string*/
-  {}
+  constructor /* private loggerService: LoggerService,
+    @Inject(UUID_INJECTION_TOKEN) private uuid: () => string*/() {}
 
   /**
    * elle retourne la liste des todos
@@ -33,9 +32,28 @@ export class TodoService {
    */
   addTodo(todo: Todo): void {
     todo.id = this.uuid();
+    if (this.todos.length == 0) {
+      todo.priority = 1;
+    } else {
+      todo.priority = this.todos[this.todos.length - 1].priority + 1;
+    }
     this.todos.push(todo);
   }
 
+  plus(id: number) {
+    this.todos[id].priority++;
+    this.todos[id + 1].priority--;
+    this.sortTodos();
+  }
+  moins(id: number) {
+    this.todos[id].priority--;
+    this.todos[id - 1].priority++;
+    this.sortTodos();
+  }
+
+  sortTodos() {
+    this.todos.sort((todo1, todo2) => todo1.priority - todo2.priority);
+  }
   /**
    * Delete le todo s'il existe
    *

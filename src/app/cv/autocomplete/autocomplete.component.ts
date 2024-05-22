@@ -1,7 +1,14 @@
 import { Component, inject } from "@angular/core";
 import { FormBuilder, AbstractControl } from "@angular/forms";
-import { debounceTime, distinctUntilChanged, switchMap, tap } from "rxjs";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  Observable,
+  switchMap,
+  tap,
+} from "rxjs";
 import { CvService } from "../services/cv.service";
+import { Cv } from "../model/cv";
 
 @Component({
   selector: "app-autocomplete",
@@ -14,13 +21,14 @@ export class AutocompleteComponent {
   get search(): AbstractControl {
     return this.form.get("search")!;
   }
+  cvs$: Observable<Cv[]>;
   form = this.formBuilder.group({ search: [""] });
   constructor() {
-    this.search.valueChanges
-      .pipe(
-        debounceTime(500),
-        tap((chaine) => console.log({ chaine }))
-      )
-      .subscribe();
+    this.cvs$ = this.search.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap((chaine) => console.log({ chaine })),
+      switchMap((search) => this.cvService.selectByName(search))
+    );
   }
 }

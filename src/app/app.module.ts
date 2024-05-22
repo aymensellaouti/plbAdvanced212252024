@@ -52,6 +52,7 @@ import { FromOfComponent } from "./rxjs/from-of/from-of.component";
 import { CdPereComponent } from './cd/cd-pere/cd-pere.component';
 import { CdFilsComponent } from './cd/cd-fils/cd-fils.component';
 import { UsersListElementComponent } from './optimizationPattern/users-list-element/users-list-element.component';
+import { FiboPipe } from './pipes/fibo.pipe';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { UsersListElementComponent } from './optimizationPattern/users-list-elem
     CdPereComponent,
     CdFilsComponent,
     UsersListElementComponent,
+    FiboPipe,
   ],
   imports: [
     BrowserModule,

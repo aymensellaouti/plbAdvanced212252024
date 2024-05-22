@@ -42,14 +42,7 @@ const routes: Routes = [
   {
     path: "",
     component: FrontComponent,
-    children: [
-      {
-        path: "todo",
-        component: TodoComponent,
-        canDeactivate: [canLeaveGuard],
-      },
-      { path: "word", component: MiniWordComponent },
-    ],
+    children: [{ path: "word", component: MiniWordComponent }],
   },
   {
     path: "admin",

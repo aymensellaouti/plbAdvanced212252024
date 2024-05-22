@@ -49,7 +49,6 @@ import { Logger2Service } from "./services/logger2.service";
 import { v4 as uuidv4, v4 } from "uuid";
 import { UUID_INJECTION_TOKEN } from "./injection tokens/uuid.injection-token";
 import { FromOfComponent } from "./rxjs/from-of/from-of.component";
-import { TodoModule } from "./todo/todo.module";
 import { CvModule } from "./cv/cv.module";
 @NgModule({
   declarations: [
@@ -86,7 +85,6 @@ import { CvModule } from "./cv/cv.module";
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    TodoModule,
     CvModule,
     AppRoutingModule,
     HttpClientModule,

@@ -35,6 +35,7 @@ export class TestObservableComponent {
         filter((x) => x % 2 == 0),
         /* 12 6 */
         take(1)
+        /* 12 */
       )
       .subscribe({
         next: (donnes) => {

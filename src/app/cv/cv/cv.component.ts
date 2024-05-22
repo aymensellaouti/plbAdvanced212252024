@@ -11,7 +11,14 @@ import { TodoService } from "../../todo/service/todo.service";
   styleUrls: ["./cv.component.css"],
 })
 export class CvComponent {
-  cvs: Cv[] = [];
+  cvs$: Observable<Cv[]> = this.cvService.getCvs().pipe(
+    catchError((e) => {
+      this.toastr.error(`
+          Attention!! Les données sont fictives, problème avec le serveur.
+          Veuillez contacter l'admin.`);
+      return of(this.cvService.getFakeCvs());
+    })
+  );
   selectedCv: Cv | null = null;
   /*   selectedCv: Cv | null = null; */
   date = new Date();
@@ -21,7 +28,7 @@ export class CvComponent {
     private toastr: ToastrService,
     private cvService: CvService
   ) {
-    this.cvService.getCvs().subscribe({
+    /* this.cvService.getCvs().subscribe({
       next: (cvs) => {
         this.cvs = cvs;
       },
@@ -31,7 +38,7 @@ export class CvComponent {
           Attention!! Les données sont fictives, problème avec le serveur.
           Veuillez contacter l'admin.`);
       },
-    });
+    }); */
     /* this.logger.logger("je suis le cvComponent"); */
     this.toastr.info("Bienvenu dans notre CvTech");
   }

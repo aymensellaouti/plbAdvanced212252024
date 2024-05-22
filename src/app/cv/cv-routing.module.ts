@@ -9,23 +9,23 @@ import { MasterDetailComponent } from "./master-detail/master-detail.component";
 
 export const CV_MODULE = [
   {
-    path: "cv",
+    path: "",
     component: CvComponent,
   } /* todo/add */,
   {
-    path: "cv/add",
+    path: "add",
     component: AddCvComponent,
     canActivate: [authGuard],
   },
   {
-    path: "cv/list",
+    path: "list",
     component: MasterDetailComponent,
     children: [{ path: ":id", component: DetailsCvComponent }],
     resolve: {
       cvs: listCvsResolver,
     },
   },
-  { path: "cv/:id", component: DetailsCvComponent, data: { name: "ophélie" } },
+  { path: ":id", component: DetailsCvComponent, data: { name: "ophélie" } },
 ];
 
 @NgModule({

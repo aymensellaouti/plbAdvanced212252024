@@ -49,6 +49,9 @@ import { Logger2Service } from "./services/logger2.service";
 import { v4 as uuidv4, v4 } from "uuid";
 import { UUID_INJECTION_TOKEN } from "./injection tokens/uuid.injection-token";
 import { FromOfComponent } from "./rxjs/from-of/from-of.component";
+import { CdPereComponent } from './cd/cd-pere/cd-pere.component';
+import { CdFilsComponent } from './cd/cd-fils/cd-fils.component';
+import { UsersListElementComponent } from './optimizationPattern/users-list-element/users-list-element.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,9 @@ import { FromOfComponent } from "./rxjs/from-of/from-of.component";
     UserListComponent,
     ProductsComponent,
     FromOfComponent,
+    CdPereComponent,
+    CdFilsComponent,
+    UsersListElementComponent,
   ],
   imports: [
     BrowserModule,

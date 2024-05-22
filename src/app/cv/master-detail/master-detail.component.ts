@@ -1,17 +1,18 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnDestroy } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { CvService } from "../services/cv.service";
 import { Cv } from "../model/cv";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-master-detail",
   templateUrl: "./master-detail.component.html",
   styleUrls: ["./master-detail.component.css"],
 })
-export class MasterDetailComponent {
+export class MasterDetailComponent implements OnDestroy {
   cvs: Cv[] = [];
-
+  subscription: Subscription;
   constructor(
     /*     private logger: LoggerService, */
     private toastr: ToastrService,
@@ -33,8 +34,12 @@ export class MasterDetailComponent {
     }); */
     /* this.logger.logger("je suis le cvComponent"); */
     this.toastr.info("Bienvenu dans notre CvTech");
-    this.cvService.selectCv$.subscribe((cv) =>
+    /* Je m'inscris */
+    this.subscription = this.cvService.selectCv$.subscribe((cv) =>
       this.router.navigate([cv.id], { relativeTo: this.acr })
     );
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

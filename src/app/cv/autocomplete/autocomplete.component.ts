@@ -9,7 +9,7 @@ import {
 } from "rxjs";
 import { CvService } from "../services/cv.service";
 import { Cv } from "../model/cv";
-
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 @Component({
   selector: "app-autocomplete",
   templateUrl: "./autocomplete.component.html",
@@ -28,7 +28,8 @@ export class AutocompleteComponent {
       debounceTime(500),
       distinctUntilChanged(),
       tap((chaine) => console.log({ chaine })),
-      switchMap((search) => this.cvService.selectByName(search))
+      switchMap((search) => this.cvService.selectByName(search)),
+      takeUntilDestroyed()
     );
   }
 }
